@@ -6,10 +6,10 @@
 
 #include "GLImageCudas.h"
 
-class GLRipplingImage : public GLImageCudas {
+class GLMandelBrotImage : public GLImageCudas {
     public:
-	GLRipplingImage(int dx, int dy);
-	virtual ~GLRipplingImage();
+	GLMandelBrotImage(int dx, int dy);
+	virtual ~GLMandelBrotImage();
 
     protected:
 	virtual void performKernel(uchar4* ptrDevPixels, int w, int h);

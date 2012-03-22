@@ -1,7 +1,8 @@
 #include <stdlib.h>
+#include <iostream>
 
 #include "GLUTWindowManagers.h"
-#include "RipplingImage.hpp"
+#include "MandelBrotImage.hpp"
 #include "cuda_gl_interop.h"
 
 #include "cudaTools.h"
@@ -10,6 +11,8 @@
 int main(int argc, char** argv){
     if (nbDeviceDetect() >= 1){
 	int deviceId = 2;
+
+	std::cout << "Launch MandelBrot in Cuda" << std::endl;
 
 	HANDLE_ERROR(cudaSetDevice(deviceId)); // active gpu of deviceId
 	HANDLE_ERROR(cudaSetDeviceFlags(cudaDeviceMapHost)); // Not all gpu allow the use of mapMemory (avant prremier appel au kernel)
@@ -21,7 +24,7 @@ int main(int argc, char** argv){
 	int w = 600;
 	int h = 600;
 
-	GLRipplingImage* image = new GLRipplingImage(w, h);
+	GLMandelBrotImage* image = new GLMandelBrotImage(w, h);
 
 	glutWindowManager->createWindow(image);
 	glutWindowManager->runALL(); //Blocking

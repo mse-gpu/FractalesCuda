@@ -2,19 +2,19 @@
 #include "GLImageCudas.h"
 #include "ColorTools_Device.h"
 
-__global__ static void kernelAnimationHSB(uchar4* ptrDevPixels, int w, int h, float t);
+__global__ static void mandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, float t);
 
 __device__ static float color(int w, int h, float x, float y, float t);
 __device__ static float d(int w, int h, float x, float y);
 
-void useKernelAnimationHSB(uchar4* ptrDevPixels, int w, int h, float t){
+void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, float t){
     dim3 blockPerGrid = dim3(32, 32, 1);
     dim3 threadPerBlock = dim3(16, 16, 1);
 
-    kernelAnimationHSB<<<blockPerGrid,threadPerBlock>>>(ptrDevPixels, w, h, t);
+    mandelBrotAnimation<<<blockPerGrid,threadPerBlock>>>(ptrDevPixels, w, h, t);
 }
 
-__global__ static void kernelAnimationHSB(uchar4* ptrDevPixels, int w, int h, float t){
+__global__ static void mandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, float t){
     int i = threadIdx.y + blockIdx.y * blockDim.y;
     int j = threadIdx.x + blockIdx.x * blockDim.x;
 
