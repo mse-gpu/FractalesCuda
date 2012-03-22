@@ -1,22 +1,21 @@
 #include <cmath>
 #include "MandelBrotImage.hpp"
 
-extern void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, float t);
+extern void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, int N, const DomaineMaths& domainNew);
 
-GLMandelBrotImage::GLMandelBrotImage(int dx, int dy): GLImageCudas(dx, dy){
-    t = 1;
-    dt = 2 * (atan(1) * 4) / (float) 36;
+GLMandelBrotImage::GLMandelBrotImage(int dx, int dy, DomaineMaths domain): acc(0), GLImageFonctionelCudaSelections(dx, dy, domain){
+    N = 52;
 }
 
 GLMandelBrotImage::~GLMandelBrotImage(){
     //Nothing
 }
 
-void GLMandelBrotImage::performKernel(uchar4* ptrDevPixels, int w, int h){
-    launchMandelBrotAnimation(ptrDevPixels, w, h, t);
+void GLMandelBrotImage::performKernel(uchar4* ptrDevPixels, int w, int h, const DomaineMaths& domainNew){
+    launchMandelBrotAnimation(ptrDevPixels, w, h, N, domainNew);
 }
 
 void GLMandelBrotImage::idleFunc(){
-    t += dt;
+    ++N;
     updateView();
 }

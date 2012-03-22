@@ -4,20 +4,21 @@
 #include <iostream>
 #include "cudaTools.h"
 
-#include "GLImageCudas.h"
+#include "DomaineMaths.h"
+#include "GLImageFonctionelCudaSelections.h"
 
-class GLMandelBrotImage : public GLImageCudas {
+class GLMandelBrotImage : public GLImageFonctionelCudaSelections {
     public:
-	GLMandelBrotImage(int dx, int dy);
+	GLMandelBrotImage(int dx, int dy, DomaineMaths domain);
 	virtual ~GLMandelBrotImage();
 
     protected:
-	virtual void performKernel(uchar4* ptrDevPixels, int w, int h);
+	virtual void performKernel(uchar4* ptrDevPixels, int w, int h, const DomaineMaths& domainNew);
 	virtual void idleFunc();
 
     private:
-	float t;
-	float dt;
+	int N;
+	float acc;
 };
 
 #endif

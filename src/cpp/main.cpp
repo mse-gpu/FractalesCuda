@@ -21,10 +21,17 @@ int main(int argc, char** argv){
 	GLUTWindowManagers::init(argc, argv);
 	GLUTWindowManagers* glutWindowManager = GLUTWindowManagers::getInstance();
 
-	int w = 600;
+	float xMin = -1.3968;
+	float xMax = -1.3578;
+	float yMin = -0.03362;
+	float yMax = 0.0013973;
+
+	DomaineMaths domain(xMin, yMin, xMax - xMin, yMax - yMin);
+
+	int w = 800;
 	int h = 600;
 
-	GLMandelBrotImage* image = new GLMandelBrotImage(w, h);
+	GLMandelBrotImage* image = new GLMandelBrotImage(w, h, domain);
 
 	glutWindowManager->createWindow(image);
 	glutWindowManager->runALL(); //Blocking
