@@ -1,4 +1,3 @@
-#include <cmath>
 #include "JuliaImage.hpp"
 
 extern void launchJuliaAnimation(uchar4* ptrDevPixels, int w, int h, int N, const DomaineMaths& domainNew);

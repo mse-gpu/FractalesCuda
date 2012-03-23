@@ -1,4 +1,3 @@
-#include <cmath>
 #include "MandelBrotImage.hpp"
 
 extern void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, int N, const DomaineMaths& domainNew);
