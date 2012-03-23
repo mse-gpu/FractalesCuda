@@ -18,7 +18,6 @@ class GLMandelBrotImage : public GLImageFonctionelCudaSelections {
 
     private:
 	int N;
-	float acc;
 };
 
 #endif

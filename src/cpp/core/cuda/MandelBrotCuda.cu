@@ -12,7 +12,8 @@ void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, int N, const 
     dim3 blockPerGrid = dim3(32, 32, 1);
     dim3 threadPerBlock = dim3(16, 16, 1);
 
-    CalibreurCudas calibreur(0, 0.99f, 0.0f, 0.7f);
+    //TODO Check the value 0.7f
+    CalibreurCudas calibreur(0, N, 0.0f, 0.7f);
     mandelBrotAnimation<<<blockPerGrid,threadPerBlock>>>(ptrDevPixels, w, h, N, domainNew, calibreur);
 }
 
@@ -73,5 +74,5 @@ __device__ static float mandelbrot(float x, float y, int N){
 	norm = sqrt(real * real + imag * imag);
     } while (norm <= 2.0 && n < N);
 
-    return n == N ? 0 : (n / (float) N);
+    return n == N ? 0 : n;
 }
