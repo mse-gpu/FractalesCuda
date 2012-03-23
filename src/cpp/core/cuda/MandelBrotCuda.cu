@@ -12,7 +12,7 @@ void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, int N, const 
     dim3 blockPerGrid = dim3(32, 32, 1);
     dim3 threadPerBlock = dim3(16, 16, 1);
 
-    CalibreurCudas calibreur(-2, 2, 0, N);
+    CalibreurCudas calibreur(0, 0.99f, 0.0f, 0.7f);
     mandelBrotAnimation<<<blockPerGrid,threadPerBlock>>>(ptrDevPixels, w, h, N, domainNew, calibreur);
 }
 
