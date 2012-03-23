@@ -12,12 +12,8 @@ void launchMandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, int N, const 
     dim3 blockPerGrid = dim3(32, 32, 1);
     dim3 threadPerBlock = dim3(16, 16, 1);
 
-    std::cout << "N" << N << std::endl;
-
     CalibreurCudas calibreur(-2, 2, 0, N);
     mandelBrotAnimation<<<blockPerGrid,threadPerBlock>>>(ptrDevPixels, w, h, N, domainNew, calibreur);
-
-    std::cout << "after N" << N << std::endl;
 }
 
 __global__ static void mandelBrotAnimation(uchar4* ptrDevPixels, int w, int h, int N, DomaineMaths domainNew, CalibreurCudas calibreur){
