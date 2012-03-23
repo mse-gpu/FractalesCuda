@@ -12,8 +12,6 @@ int main(int argc, char** argv){
     if (nbDeviceDetect() >= 1){
 	int deviceId = 2;
 
-	std::cout << "Launch MandelBrot in Cuda" << std::endl;
-
 	HANDLE_ERROR(cudaSetDevice(deviceId)); // active gpu of deviceId
 	HANDLE_ERROR(cudaSetDeviceFlags(cudaDeviceMapHost)); // Not all gpu allow the use of mapMemory (avant prremier appel au kernel)
 	HANDLE_ERROR(cudaGLSetGLDevice(deviceId));
@@ -29,6 +27,8 @@ int main(int argc, char** argv){
 	bool mandelbrot = true;
 
 	if(mandelbrot){
+	    std::cout << "Launch MandelBrot in Cuda" << std::endl;
+
 	    float xMin = -1.3968;
 	    float xMax = -1.3578;
 	    float yMin = -0.03362;
