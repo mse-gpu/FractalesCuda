@@ -2,8 +2,10 @@
 #include <iostream>
 
 #include "GLUTWindowManagers.h"
-#include "MandelBrotImage.hpp"
 #include "cuda_gl_interop.h"
+
+#include "MandelBrotImage.hpp"
+#include "JuliaImage.hpp"
 
 #include "cudaTools.h"
 #include "deviceTools.h"
@@ -24,7 +26,7 @@ int main(int argc, char** argv){
 
 	GLImageFonctionelCudaSelections* image;
 
-	bool mandelbrot = true;
+	bool mandelbrot = false;
 
 	if(mandelbrot){
 	    std::cout << "Launch MandelBrot in Cuda" << std::endl;
@@ -37,6 +39,17 @@ int main(int argc, char** argv){
 	    DomaineMaths domain(xMin, yMin, xMax - xMin, yMax - yMin);
 
 	    image = new GLMandelBrotImage(w, h, domain);
+	} else {
+	    std::cout << "Launch Julia in Cuda" << std::endl;
+
+	    float xMin = -1.7;
+	    float xMax = +1.7;
+	    float yMin = -1.1;
+	    float yMax = +1.1;
+
+	    DomaineMaths domain(xMin, yMin, xMax - xMin, yMax - yMin);
+
+	    image = new GLJuliaImage(w, h, domain);
 	}
 
 	glutWindowManager->createWindow(image);
