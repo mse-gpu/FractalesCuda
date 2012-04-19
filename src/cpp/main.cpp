@@ -100,7 +100,7 @@ int bench(int argc, char** argv){
 	    CUevent stop;
 	    HANDLE_ERROR(cudaEventCreate(&start, CU_EVENT_DEFAULT));
 	    HANDLE_ERROR(cudaEventCreate(&stop, CU_EVENT_DEFAULT));
-	    HANDLE_ERROR(cudaEventRecord(start));
+	    HANDLE_ERROR(cudaEventRecord(start,0));
 
 	    float xMin = -1.3968;
 	    float xMax = -1.3578;
@@ -114,13 +114,13 @@ int bench(int argc, char** argv){
 	    }
 
 	    float elapsed = 0;
-	    HANDLE_ERROR(cudaEventRecord(stop));
+	    HANDLE_ERROR(cudaEventRecord(stop,0));
 	    HANDLE_ERROR(cudaEventSynchronize(stop));
 	    HANDLE_ERROR(cudaEventElapsedTime(&elapsed, start, stop));
 
 	    std::cout << "MandelBrot CUDA Version took " << elapsed << "ms" << std::endl;
 
-	    HANDLE_ERROR(cudaEventRecord(start));
+	    HANDLE_ERROR(cudaEventRecord(start,0));
 
 	    xMin = -1.3968;
 	    xMax = -1.3578;
@@ -134,7 +134,7 @@ int bench(int argc, char** argv){
 	    }
 
 	    elapsed = 0;
-	    HANDLE_ERROR(cudaEventRecord(stop));
+	    HANDLE_ERROR(cudaEventRecord(stop,0));
 	    HANDLE_ERROR(cudaEventSynchronize(stop));
 	    HANDLE_ERROR(cudaEventElapsedTime(&elapsed, start, stop));
 
